@@ -1,0 +1,56 @@
+
+<link rel="stylesheet" href="/css/single_post.css">
+
+<div id="form-div">
+    <h4><%= post.content %> 
+    <% if(locals.user && locals.user.id == post.user.id) {%>
+        <span><small><a href="/post/delete/<%=post.id%>"><i class="far fa-trash-alt"></i></a></small></span>
+    <% } %>
+    </h4>
+    <p><small>posted by <%= post.user.Username %> (works as <%= post.user.designation%>)</small></p>
+
+    <% if(locals.user){%>
+        <form action="/comment/create" method="POST">
+            <div>
+                <textarea name="content" id="" cols="70" rows="5"></textarea>
+            </div>
+            <input type="hidden" name="post" value="<%= post.id %>">
+            <div>
+                <button>post</button>
+            </div>
+        </form>
+    <%}%>
+
+</div>
+
+<%if(post.comments.length == 0){%>
+    <p>No answers to this post yet</p>
+<% } else { %>
+
+    <div>
+        
+        <% for(let comment of post.comments){ %>
+            <!-- <%= comment %>< -->
+            <div id="available-comments" class="card">
+                <h5><%= comment.user.Username %>&nbsp;<small><%= comment.createdAt %></small></h5>
+                <hr>
+                <p>
+                    <%= comment.content %>
+                </p>
+                
+                <div class="icons">
+                    <div><i class="far fa-thumbs-up"></i></div>
+                    <div><i class="far fa-thumbs-down"></i></div>
+                    <% if(locals.user && locals.user.id == comment.user.id) {%>
+                    <div><a href="/comment/delete/<%= comment.id %>"><i class="far fa-trash-alt"></i></a></div>
+                    <%}%>
+                </div>
+            </div>
+            
+        <% } %>
+        
+    </div>
+
+<%}%>
+
+<script src="/js/comments.js"></script>

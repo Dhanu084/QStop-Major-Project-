@@ -1,0 +1,24 @@
+header {
+    background-color: #263e58;
+    color: white; }
+    header a {
+      color: white;
+      text-decoration: none; }
+    header ul {
+      list-style: none; 
+      margin-left: 0%;
+    }
+      header ul li {
+        display: inline-block;
+        padding-right: 4px;
+         }
+  a:hover{
+      text-decoration: none;
+      color:white
+  }
+
+  img{
+    position: absolute;
+    left:55%;
+    top:28%
+  }

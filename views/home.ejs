@@ -1,0 +1,48 @@
+
+<link rel="stylesheet" href="/css/home.css">
+
+    <%if(locals.user) {%>
+    <h5>Hello <%= locals.user.Username %></h5>
+
+    <div id="new-post-container">
+        <form action="/post/create" method="POST" id="new-post-form">  
+            <div><textarea name="post" id="" cols="50" rows="5" placeholder="Type here to create post..."></textarea></div>
+            <div id="add-post"><button class="icons"><i class="fas fa-plus"></i></button></div>
+        </form>
+    </div>
+    <%}%>
+
+    <div id="available-posts">
+        <p><h4>Recent posts</h4></p>
+        <div id="available-posts-container"> 
+            <%for(let post of posts) {%>
+                
+                    <div class="card">
+                        <a href="/post/single/<%= post.id %>"> <p> <strong><%=post.content%></strong> <small>posted by <%= post.user.Username%>(<%= post.user.designation %>)</small></p></a>
+                    </div>
+                
+    
+            <%}%>
+        </div>
+    </div>
+
+    <aside id="aside">
+        <% if(locals.user) {%>
+            <h4>Profile <a href="/user/profile"><button class="icons"><i class="far fa-edit"></i></button></a></h4>
+            <p><%= locals.user.Username %> &nbsp;&nbsp;<i class="far fa-user"></i></p>
+            <p><%= locals.user.email %> &nbsp;&nbsp;<i class="fas fa-at"></i></p>
+            <p><%= locals.user.designation %> &nbsp;&nbsp;<i class="fas fa-signature"></i></p>
+            <hr>
+            <p><h4>Your posts</h4></p>
+            <div id="aside-container">
+                <%for(let post of userposts) {%>
+                    <p> <a href="/post/single/<%= post.id %>"><strong><%=post.content%></strong></a></p>
+                <%}%>
+            </div>
+
+        <% } else { %>
+            <p><h4>Login to view your posts</h4></p>
+        <% } %>
+    </aside>
+
+    <script src="/js/posts.js"></script>

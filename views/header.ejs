@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/header.css">
+<header>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <h3 class="col-6"><p><a href="/">Qstop</a></p></h3>
+            <ul>
+                <% if(locals.user) {%>
+                    <li><a href="/users/profile/<%= user.id %>"><%= user.name %></a></li>
+                    <li><a href="/user/signout">Sign Out</a></li>
+                <%}else{%>
+                    <li><a href="/user/signin">Sign In </a></li>
+                    <li><a href="/user/signup">Sign Up</a></li>
+                <%}%>
+            </ul>
+        </div>
+        
+    </nav>
+    
+</header>

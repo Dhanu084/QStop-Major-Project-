@@ -1,0 +1,45 @@
+form{
+    text-align: center;
+    margin-top: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    color: darkgray;
+}
+
+form div{
+    display: inline-block;
+}
+
+form div input{
+    padding: 15px 30px;
+    border: 2px solid slategray;
+}
+
+button{
+    padding: 10px 30px;
+}
+
+#dp{
+    position: absolute;
+    border: 5px solid slategray;
+    border-radius: 50%;
+    height:250px;
+    width: 250px;
+    top: 15%;
+}
+
+#dp img{
+    height:100%;
+    width:100%
+}
+
+#dp-button{
+    position: absolute;
+    top: 40%;
+    left:55%;
+    font-size: 2rem;
+    border:0px;
+    z-index: 1;
+    background-color:white;
+    cursor: pointer;
+}

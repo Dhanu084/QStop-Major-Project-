@@ -1,0 +1,30 @@
+#form-div{
+    margin-left: 5%;
+    margin-top: 2%;
+}
+#available-comments{
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 70%;
+}
+
+.icons{
+    border-top: 1px solid lightgray;
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.icons i{
+    padding: 0px 20px;
+    font-size: 1.5rem;
+    margin-top: 12%;
+}
+i{
+    cursor: pointer;
+}
+
+i:hover{
+    color: red;
+}

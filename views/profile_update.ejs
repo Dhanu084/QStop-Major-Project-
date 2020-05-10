@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/profile.css">
+
+<form action="/user/update" method="POST">
+    <input type="hidden" name="id" value="<%= locals.user.id %>">
+    <button id="dp-button"><i class="far fa-edit"></i></button>
+    <div id="dp">
+        <img src="" alt="">
+    </div>
+    <div>
+        <input type="text" name="Username" value="<%= locals.user.Username %>">
+    </div>
+
+    <div>
+        <input type="password" name="password" value="<%= locals.user.password %>">
+    </div>
+
+    <div>
+        <input type="email" name="email" value="<%= locals.user.email %>">
+    </div>
+
+    <div>
+        <input type="text" name="designation" value="<%= locals.user.designation %>">
+    </div>
+
+    <div>
+        <button>update</button>
+    </div>
+</form>
