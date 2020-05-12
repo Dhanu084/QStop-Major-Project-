@@ -96,6 +96,7 @@ module.exports.profile = function(req,res){
 
 module.exports.otheruser = async function(req,res){
     //console.log(req.user)
+    if(!req.isAuthenticated()) res.redirect('/');
     try{
         let user = await (await User.findById(req.query.id))
         .populate('friendships');
@@ -103,12 +104,12 @@ module.exports.otheruser = async function(req,res){
         let friends=[];
         
         for(let friend of user.friendships){
-            if(friend.from_user!=user.id){
-                console.log(friend.from_user+" "+user.id)
+            if(friend!=user.id){
+                //console.log(friend+" "+user.id)
                 friends.push(friend);
             }
         }
-        console.log(friends);
+        //console.log(friends);
         res.render('other_user.ejs',{
             user:user,
             posts:post,

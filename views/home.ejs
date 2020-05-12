@@ -18,7 +18,7 @@
             <%for(let post of posts) {%>
                 
                     <div class="card">
-                        <a href="/post/single/<%= post.id %>"> <p> <strong><%=post.content%></strong> <small>posted by <%= post.user.Username%>(<%= post.user.designation %>)</small></p></a>
+                       <div id="smallDiv-dp"><img src="<%= post.user.avatar %>" alt="" id="small-dp"></div> <a href="/post/single/<%= post.id %>"> <p> <strong><%=post.content%></strong> <small>posted by <%= post.user.Username%>(<%= post.user.designation %>)</small></p></a>
                     </div>
                 
     
@@ -35,6 +35,9 @@
             <p><%= locals.user.Username %> &nbsp;&nbsp;<i class="far fa-user"></i></p>
             <p><%= locals.user.email %> &nbsp;&nbsp;<i class="fas fa-at"></i></p>
             <p><%= locals.user.designation %> &nbsp;&nbsp;<i class="fas fa-signature"></i></p>
+            <%if(friends!=undefined){%>
+                <p><%= friends.length %> friends</p>
+            <%}%>
             <hr>
             <p><h4>Your posts</h4></p>
             <div id="aside-container">

@@ -28,3 +28,9 @@ i{
 i:hover{
     color: red;
 }
+
+#default{
+    margin-left: 30%;
+    margin-top: 5%;
+    font-size: 3rem;
+}

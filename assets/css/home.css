@@ -32,6 +32,7 @@
 #available-posts{
     width: 50%;
     margin-left: 25px;
+    font-size: 1.2rem;
 }
 
 aside{
@@ -69,3 +70,10 @@ body a:hover{
     border-radius:50%;
     
 }
+
+#small-dp{
+    height: 1.8rem;
+    width: 2rem;
+    border-radius:50%
+}
+

@@ -25,6 +25,7 @@ module.exports.createPost = async function(req,res){
 }
 
 module.exports.single_post = async function(req,res){
+    if(!req.isAuthenticated()) res.redirect('back');
     try{
         let post = await Post.findById(req.params.id)
         .populate('user')
