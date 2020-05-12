@@ -14,5 +14,7 @@ router.post('/create-session',passport.authenticate(
 
 router.get('/profile',userController.profile);
 router.post('/update/:id',userController.updateUser);
+router.get('/other-user',userController.otheruser);
+router.post('/toggleFriend',userController.toggleFriend);
 
 module.exports = router;

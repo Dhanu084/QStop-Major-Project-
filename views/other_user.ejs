@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/other_user.css">
+
+
+    <div id="basic-info">
+        <div id="dp">
+            <img src="<%= user.avatar %>" alt="<%= user.Username%>">
+        </div>
+        <div id="info">
+            <div><%= user.Username %> &nbsp;&nbsp;<i class="far fa-user"></i></div>
+            <div><%= user.designation %>&nbsp;&nbsp;<i class="fas fa-signature"></i></div>
+            <div><%= user.email %>&nbsp;&nbsp;<i class="fas fa-at"></i></div>
+            <div ><a href="/user/toggleFriend/?id=<%= user.id %>" id="other-user"><i class="fas fa-user-plus" id="<%= user.id %>"></i></a>
+            <span id="friend-count"><%= friends.length %></span></div>
+        </div>
+    </div>
+
+    <div id="available-posts">
+        <p><h4>Recent posts</h4></p>
+        <div id="available-posts-container" class="card"> 
+            <%for(let post of posts) {%>
+                
+                    <div>
+                        <a href="/post/single/<%= post.id %>"> <p> <strong><%=post.content%></strong> </p></a>
+                    </div>
+                
+    
+            <%}%>
+        </div>
+    </div>
+    
+<script src="/js/friendtoggle.js"></script>

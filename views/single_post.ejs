@@ -7,7 +7,7 @@
         <span><small><a href="/post/delete/<%=post.id%>"><i class="far fa-trash-alt"></i></a></small></span>
     <% } %>
     </h4>
-    <p><small>posted by <%= post.user.Username %> (works as <%= post.user.designation%>)</small></p>
+    <p><small>posted by <a href="/user/other-user?id=<%= post.user.id %>"><%= post.user.Username %> </a> (works as <%= post.user.designation%>)</small></p>
 
     <% if(locals.user){%>
         <form action="/comment/create" method="POST" id="comments-form">

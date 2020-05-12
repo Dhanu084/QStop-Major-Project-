@@ -3,8 +3,8 @@ const Post = require('../models/posts');
 const Comment = require('../models/comments');
 
 module.exports.createLike = async function(req,res){
-    console.log(req.query.type);
-    console.log(req.query.id);
+    // console.log(req.query.type);
+    // console.log(req.query.id);
     try{
         //likes/toggle/?id:abcdef&type="Post"
         let likeable;

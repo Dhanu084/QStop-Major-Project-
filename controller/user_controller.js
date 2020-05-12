@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const fs = require('fs');
 const path = require('path');
-
+const Post = require('../models/posts');
+const Friendship = require('../models/friendships');
 module.exports.signin = (req,res) =>{
     if(req.isAuthenticated()){
         res.redirect('/');
@@ -54,8 +55,7 @@ module.exports.signout = function(req,res){
 }
 
 module.exports.updateUser = async function(req,res){
-    console.log(req.params);
-    console.log(req.user.id,req.user.id)
+    
     if(req.user.id!=req.params.id) res.redirect('back');
     try{
         //console.log(await User.findById(req.user.id));
@@ -92,4 +92,77 @@ module.exports.profile = function(req,res){
     res.render('profile_update.ejs',{
         title:"profile"
     })
+}
+
+module.exports.otheruser = async function(req,res){
+    //console.log(req.user)
+    try{
+        let user = await (await User.findById(req.query.id))
+        .populate('friendships');
+        let post = await Post.find({user:user.id});
+        let friends=[];
+        
+        for(let friend of user.friendships){
+            if(friend.from_user!=user.id){
+                console.log(friend.from_user+" "+user.id)
+                friends.push(friend);
+            }
+        }
+        console.log(friends);
+        res.render('other_user.ejs',{
+            user:user,
+            posts:post,
+            friends
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.redirect('back');
+    }
+    
+}
+
+module.exports.toggleFriend = async function (req,res){
+    try{
+        let other_user = await User.findById(req.query.id);
+        let current_user = await User.findById(req.user.id);
+        let friend = await Friendship.findOne({
+            from_user:current_user.id,
+            to_user:other_user.id
+        });
+
+        if(friend){
+            other_user.friendships.pull(friend);
+            current_user.friendships.pull(friend);
+            other_user.save();
+            current_user.save();
+            friend.remove();
+            friend.save();
+
+            return res.status(200).send({
+                message:"friend removed"
+            });
+        }else{
+            friend = await Friendship.create({
+                from_user:current_user.id,
+                to_user:other_user.id
+            });
+            current_user.friendships.push(friend);
+            other_user.friendships.push(friend);
+            current_user.save();
+            other_user.save();
+            return res.status(200).send({
+                data:friend,
+                message:"friend added"
+            })
+        }
+
+        
+        res.redirect('back');
+    }
+    catch(err){
+        console.log(err);
+        req.redirect('back');
+    }
+
 }
