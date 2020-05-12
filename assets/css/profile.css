@@ -30,7 +30,12 @@ button{
 
 #dp img{
     height:100%;
-    width:100%
+    width:100%;
+    position: absolute;
+    background-size: contain;
+    left: 0;
+    top:-1%;
+    border-radius:50%
 }
 
 #dp-button{

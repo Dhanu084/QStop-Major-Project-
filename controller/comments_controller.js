@@ -2,7 +2,7 @@ const Comment = require('../models/comments');
 const Post = require('../models/posts');
 
 module.exports.create = async function(req,res){
-    
+    console.log(req.body);
     try{
        let post = await Post.findById(req.body.post);
        //console.log(post);
@@ -17,10 +17,18 @@ module.exports.create = async function(req,res){
 
        await post.comments.push(comment);
        await post.save();
-       
+       if(req.xhr){
+           return res.status(200).send({
+               data:{
+                   comment:comment
+               },
+               message:"Comment created"
+           })
+       }
        res.redirect('back');
     }
     catch(err){
+        console.log(err);
         res.redirect('back');
     }
 }

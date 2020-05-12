@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/home.css">
 
     <%if(locals.user) {%>
-    <h5>Hello <%= locals.user.Username %></h5>
+    
 
     <div id="new-post-container">
         <form action="/post/create" method="POST" id="new-post-form">  
@@ -28,6 +28,9 @@
 
     <aside id="aside">
         <% if(locals.user) {%>
+            <div id="profile-pic">
+                <img src="<%= locals.user.avatar %>" alt="">
+            </div>
             <h4>Profile <a href="/user/profile"><button class="icons"><i class="far fa-edit"></i></button></a></h4>
             <p><%= locals.user.Username %> &nbsp;&nbsp;<i class="far fa-user"></i></p>
             <p><%= locals.user.email %> &nbsp;&nbsp;<i class="fas fa-at"></i></p>

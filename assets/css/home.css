@@ -1,10 +1,12 @@
 
 
 #new-post-container{
+    top: 10px;
     position: relative;
     width: 50vw;
     display: flex;
     flex-direction: row;
+    margin-left: 30px;
 }
 #new-post-container div{
     display: inline-block;
@@ -29,6 +31,7 @@
 
 #available-posts{
     width: 50%;
+    margin-left: 25px;
 }
 
 aside{
@@ -48,4 +51,21 @@ body a:hover{
 
 #aside-container{
     border:0px;
+}
+
+#profile-pic{
+    height:100px;
+    width: 100px;
+    border: 2px solid black;
+    border-radius:50%;
+    margin-bottom: 5%;
+}
+#profile-pic img{
+    position: absolute;
+    top:0%;
+    left:-1%;
+    height:100px;
+    width:100px;
+    border-radius:50%;
+    
 }

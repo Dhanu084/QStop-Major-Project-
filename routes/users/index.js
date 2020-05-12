@@ -13,6 +13,6 @@ router.post('/create-session',passport.authenticate(
 ),userController.createSession);
 
 router.get('/profile',userController.profile);
-router.post('/update',userController.updateUser);
+router.post('/update/:id',userController.updateUser);
 
 module.exports = router;

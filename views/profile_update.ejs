@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="/css/profile.css">
 
-<form action="/user/update" method="POST">
-    <input type="hidden" name="id" value="<%= locals.user.id %>">
+<form action="/user/update/<%=locals.user.id%>"  method="POST" enctype="multipart/form-data">
     <button id="dp-button"><i class="far fa-edit"></i></button>
     <div id="dp">
-        <img src="" alt="">
+        <img src="<%= user.avatar %>" alt="<%= user.name %>">
+    </div>
+    <div>
+        <input type="file" name="avatar">
     </div>
     <div>
         <input type="text" name="Username" value="<%= locals.user.Username %>">

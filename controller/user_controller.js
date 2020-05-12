@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.signin = (req,res) =>{
     if(req.isAuthenticated()){
@@ -52,12 +54,33 @@ module.exports.signout = function(req,res){
 }
 
 module.exports.updateUser = async function(req,res){
+    console.log(req.params);
+    console.log(req.user.id,req.user.id)
+    if(req.user.id!=req.params.id) res.redirect('back');
     try{
-        console.log(req.body.id);
         //console.log(await User.findById(req.user.id));
-        let user = await User.findByIdAndUpdate(req.body.id,req.body);
-        //.log(user);
-        res.redirect('back');
+        let user = await User.findById(req.params.id);
+        //console.log("user:",user);
+        User.uploadedAvatar(req,res,function(err){
+            if(err){
+                console.log("Multer error",err);
+                return;
+            }
+            user.Username = req.body.Username;
+            user.password = req.body.password;
+            user.email = req.body.email;
+            user.designation = req.body.designation;
+            if(req.file){
+
+                if(user.avatar){
+                    fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                }
+                user.avatar = User.avatarPath+'/'+req.file.filename;
+            }
+            user.save();
+            return res.redirect('back');
+        });
+
     }
     catch(err){
         console.log(err);

@@ -31,7 +31,10 @@ module.exports.single_post = async function(req,res){
         .populate({
             path:'comments',
             populate:{
-                path:'user'
+                path:'user',
+                populate:{
+                    path:'likes'
+                }
             }
         })
    

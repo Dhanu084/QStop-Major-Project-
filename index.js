@@ -9,10 +9,12 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy'); 
 const mongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
 
 app.use(express.urlencoded());
 
 app.use(express.static('./assets'));
+app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(expressLayouts);
 //extract style and scripts from sub-pages
 app.set('layout extractStyles',true);
