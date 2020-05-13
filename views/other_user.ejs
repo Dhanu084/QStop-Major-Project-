@@ -3,14 +3,17 @@
 
     <div id="basic-info">
         <div id="dp">
-            <img src="<%= user.avatar %>" alt="<%= user.Username%>">
+            <img src="<%= other_user.avatar %>" alt="<%= other_user.Username%>">
         </div>
         <div id="info">
-            <div><%= user.Username %> &nbsp;&nbsp;<i class="far fa-user"></i></div>
-            <div><%= user.designation %>&nbsp;&nbsp;<i class="fas fa-signature"></i></div>
-            <div><%= user.email %>&nbsp;&nbsp;<i class="fas fa-at"></i></div>
-            <div ><a href="/user/toggleFriend/?id=<%= user.id %>" id="other-user"><i class="fas fa-user-plus" id="<%= user.id %>"></i></a>
-            <span id="friend-count"><%= friends.length %></span></div>
+            <div><%= other_user.Username %> &nbsp;&nbsp;<i class="far fa-user"></i></div>
+            <div><%= other_user.designation %>&nbsp;&nbsp;<i class="fas fa-signature"></i></div>
+            <div><%= other_user.email %>&nbsp;&nbsp;<i class="fas fa-at"></i></div>
+            
+            <% if(other_user.id != locals.user.id) {%>
+            <div ><a href="/user/toggleFriend/?id=<%= other_user.id %>" id="other-user"><i class="fas fa-user-plus" id="<%= user.id %>"></i></a>
+            <%}%>
+            <span id="friend-count"><%= friends.length %>&nbsp; friends</span></div>
         </div>
     </div>
 

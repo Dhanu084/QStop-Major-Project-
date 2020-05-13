@@ -2,7 +2,7 @@ const Comment = require('../models/comments');
 const Post = require('../models/posts');
 
 module.exports.create = async function(req,res){
-    console.log(req.body);
+    //console.log(req.body);
     try{
        let post = await Post.findById(req.body.post);
        //console.log(post);
@@ -25,6 +25,7 @@ module.exports.create = async function(req,res){
                message:"Comment created"
            })
        }
+       req.flash('success','answer added');
        res.redirect('back');
     }
     catch(err){
@@ -35,18 +36,21 @@ module.exports.create = async function(req,res){
 
 
 module.exports.delete = async function(req,res){
+    console.log(req.params.id)
     try{
-        //console.log(req.params.id)
+        
         let comment = await Comment.findById(req.params.id);
-        //console.log(comment.user._id , req.user.id)
+        console.log(comment.user._id , req.user.id)
         if(comment.user._id == req.user.id){
             let postId = comment.post.id;
             await Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}});
             await comment.remove();
-            //await comment.save();
+            await comment.save();
+            req.flash('success','answer deleted');
             return res.redirect('back');
         }
         else{
+            req.flash('error','not authorized');
             return res.redirect('back');
         }
         

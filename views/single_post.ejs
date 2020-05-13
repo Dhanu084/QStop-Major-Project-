@@ -32,7 +32,14 @@
         <% for(let comment of post.comments){ %>
             <!-- <%= comment %>< -->
             <div id="available-comments" class="card">
-                <h5><%= comment.user.Username %>&nbsp;<small><%= comment.createdAt %></small></h5>
+                <h5><%= comment.user.Username %>&nbsp;<small><%= comment.createdAt %>
+                    <span><% if(locals.user && locals.user.id == comment.user.id) {%>
+                        <a href="/comment/delete/<%= comment.id %>"><i class="far fa-trash-alt"></i></a>
+                    <%}%>
+                    </span>
+                </small>
+                </h5>
+                
                 <hr>
                 <p>
                     <%= comment.content %>
@@ -42,9 +49,7 @@
                 <div class="icons">
                     <div><span id="<%= comment.id %>likes"><%= comment.likes.length %></span><a href="/likes/createLike/?type=Comment&&id=<%= comment.id %>"  id="<%= comment._id %>"><i class="far fa-thumbs-up"></i></a></div>
                     <!-- <div><i class="far fa-thumbs-down"></i></div> -->
-                    <% if(locals.user && locals.user.id == comment.user.id) {%>
-                    <div><a href="/comment/delete/<%= comment.id %>"><i class="far fa-trash-alt"></i></a></div>
-                    <%}%>
+                    
                 </div>
                 
             </div>
@@ -55,5 +60,5 @@
 
 <%}%>
 
-<script src="/js/comments.js"></script>
+
 <script src="/js/likes.js"></script>

@@ -1,6 +1,8 @@
 {
     let a = 0;
-    $('#available-comments .icons>div a').on('click',function(e){
+    let item = $('#available-comments .icons > div >a');
+    console.log(item);
+    $('#available-comments .icons > div >a').on('click',function(e){
         a = e.target
         e.preventDefault();
         console.log($(this))

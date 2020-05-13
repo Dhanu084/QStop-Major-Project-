@@ -11,6 +11,7 @@ module.exports.createPost = async function(req,res){
         
         if(req.xhr){
             nodemailer.newPost(req.user);
+            req.flash('success','post-added');
             return res.status(200).send({
                 data:{
                     post:post,
@@ -62,7 +63,7 @@ module.exports.deletePost = async function(req,res){
             post:post.id
         })
         post.delete();
-        
+        req.flash('success','post-deleted');
         res.redirect('/');
     }
     catch(err){

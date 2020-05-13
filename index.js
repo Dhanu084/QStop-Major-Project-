@@ -10,7 +10,8 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy'); 
 const mongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
-
+const flash = require('connect-flash');
+const customMiddleware = require('./config/middleware');
 app.use(express.urlencoded());
 
 app.use(express.static('./assets'));
@@ -44,7 +45,8 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 
-
+app.use(flash());
+app.use(customMiddleware.setFlash);
 
 
 app.use('/',require('./routes'));

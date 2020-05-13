@@ -47,11 +47,12 @@ module.exports.createUser = async function(req,res){
 }
 
 module.exports.createSession = function(req,res){
-    //req.flash('success','logged in successfully');
+    req.flash('success','Welcome '+req.user.Username);
     res.redirect('/');
 }
 
 module.exports.signout = function(req,res){
+    req.flash('success','logged out');
     req.logout();
     res.redirect('/')
 }
@@ -80,6 +81,7 @@ module.exports.updateUser = async function(req,res){
                 user.avatar = User.avatarPath+'/'+req.file.filename;
             }
             user.save();
+            req.flash('success','updated')
             return res.redirect('back');
         });
 
@@ -91,6 +93,7 @@ module.exports.updateUser = async function(req,res){
 }
 
 module.exports.profile = function(req,res){
+    
     res.render('profile_update.ejs',{
         title:"profile"
     })
@@ -98,7 +101,7 @@ module.exports.profile = function(req,res){
 
 module.exports.otheruser = async function(req,res){
     
-    if(req.user._id == req.query._id) res.redirect('/');
+    
     if(!req.isAuthenticated()) res.redirect('/');
     try{
         let user = await (await User.findById(req.query.id))
@@ -114,7 +117,7 @@ module.exports.otheruser = async function(req,res){
         }
         //console.log(friends);
         res.render('other_user.ejs',{
-            user:user,
+            other_user:user,
             posts:post,
             friends
         });
@@ -143,7 +146,7 @@ module.exports.toggleFriend = async function (req,res){
             current_user.save();
             friend.remove();
             friend.save();
-
+            req.flash('success','friend - removed');
             return res.status(200).send({
                 message:"friend removed"
             });
@@ -157,6 +160,7 @@ module.exports.toggleFriend = async function (req,res){
             other_user.friendships.push(friend);
             current_user.save();
             other_user.save();
+            req.flash('success','friend added');
             return res.status(200).send({
                 data:friend,
                 message:"friend added"
