@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const Post = require('../models/posts');
 const Friendship = require('../models/friendships');
+const friendsMailer = require('../mailers/friends');
+
 module.exports.signin = (req,res) =>{
     if(req.isAuthenticated()){
         res.redirect('/');
@@ -95,7 +97,8 @@ module.exports.profile = function(req,res){
 }
 
 module.exports.otheruser = async function(req,res){
-    //console.log(req.user)
+    
+    if(req.user._id == req.query._id) res.redirect('/');
     if(!req.isAuthenticated()) res.redirect('/');
     try{
         let user = await (await User.findById(req.query.id))
@@ -124,6 +127,7 @@ module.exports.otheruser = async function(req,res){
 }
 
 module.exports.toggleFriend = async function (req,res){
+   
     try{
         let other_user = await User.findById(req.query.id);
         let current_user = await User.findById(req.user.id);
@@ -144,6 +148,7 @@ module.exports.toggleFriend = async function (req,res){
                 message:"friend removed"
             });
         }else{
+            friendsMailer.newFriend(other_user);
             friend = await Friendship.create({
                 from_user:current_user.id,
                 to_user:other_user.id

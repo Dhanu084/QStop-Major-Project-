@@ -3,7 +3,7 @@ const Friendship = require('../models/friendships');
 module.exports.home = async (req,res) =>{
     
     try{
-        let allposts = await Post.find({}).populate('user').exec();
+        let allposts = await (await Post.find({}).sort({'createdAt':-1}).populate('user').exec());
         let friendships = await Friendship.find();
         let friends=[];
         

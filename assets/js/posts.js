@@ -19,7 +19,12 @@
                     '</div>')
                     let datas = data.data.post;
                     newDiv.attr('href',datas.id);
-                    console.log(newDiv);
+                    console.log(data.data.user.avatar);
+                    let img = $('<img />').attr({
+                        'src':data.data.user.avatar
+                    })
+                    console.log(img);
+                    img.appendTo(newDiv)
                     newDiv.html('<strong>'+datas.content+'</strong>'+'<small> posted by '+datas.user.Username+'('+datas.user.designation+')</small>')
                     
                     let newa = $('<a>','</a>')
@@ -35,7 +40,7 @@
                     newP.html('<strong>'+datas.content+'</strong>')
                     newP.appendTo(newb)
                     
-                    console.log(aside);
+                    //console.log(aside);
                     newb.prependTo(aside)
                 },
                 error:function(error){

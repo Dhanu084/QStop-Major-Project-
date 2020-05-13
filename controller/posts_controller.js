@@ -1,21 +1,25 @@
 const Post = require('../models/posts');
 const Comment = require('../models/comments');
-
+const nodemailer = require('../mailers/posts');
 module.exports.createPost = async function(req,res){
     try{
         let post = await Post.create({
             user:req.user,
             content:req.body.post
         });
-
+        
+        
         if(req.xhr){
+            nodemailer.newPost(req.user);
             return res.status(200).send({
                 data:{
-                    post:post
+                    post:post,
+                    user:req.user
                 },
                 message:"post has been published"
             })
         }
+        
         res.redirect('back');
     }
     catch(err){
